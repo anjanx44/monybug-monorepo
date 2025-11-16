@@ -2,6 +2,7 @@ package routes
 
 import (
 	"monybug-backend/internal/database"
+	"monybug-backend/internal/handlers"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -24,18 +25,12 @@ func SetupRoutes(r *gin.Engine) {
 	// API v1 routes
 	api := r.Group("/api/v1")
 	{
-		// Categories routes (placeholder)
-		api.GET("/categories", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{"message": "Categories endpoint"})
-		})
+		// Categories routes
+		api.GET("/categories", handlers.GetCategories)
+		api.POST("/categories", handlers.CreateCategory)
 
-		// Transactions routes (placeholder)
-		api.GET("/transactions", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{"message": "Transactions endpoint"})
-		})
-
-		api.POST("/transactions", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{"message": "Add transaction endpoint"})
-		})
+		// Transactions routes
+		api.GET("/transactions", handlers.GetTransactions)
+		api.POST("/transactions", handlers.CreateTransaction)
 	}
 }

@@ -17,6 +17,7 @@ func main() {
 
 	// Connect to database
 	database.Connect()
+	database.ConnectGorm()
 
 	// Run migrations
 	if err := database.RunMigrations(); err != nil {

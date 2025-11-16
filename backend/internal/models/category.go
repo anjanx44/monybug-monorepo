@@ -1,10 +1,10 @@
 package models
 
 type Category struct {
-	ID       int    `json:"id" db:"category_id"`
-	Name     string `json:"name" db:"name"`
-	Type     string `json:"type" db:"type"`
-	Priority string `json:"priority" db:"priority"`
-	Color    string `json:"color_code" db:"color_code"`
-	IsActive bool   `json:"is_active" db:"is_active"`
+	ID       uint   `json:"id" gorm:"primaryKey;column:category_id"`
+	Name     string `json:"name" gorm:"uniqueIndex;not null"`
+	Type     string `json:"type" gorm:"check:type IN ('INCOME','EXPENSE')"`
+	Priority string `json:"priority"`
+	Color    string `json:"color_code" gorm:"column:color_code"`
+	IsActive bool   `json:"is_active" gorm:"default:true"`
 }
