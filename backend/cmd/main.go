@@ -18,6 +18,11 @@ func main() {
 	// Connect to database
 	database.Connect()
 
+	// Run migrations
+	if err := database.RunMigrations(); err != nil {
+		log.Fatal("Failed to run migrations:", err)
+	}
+
 	// Create Gin router
 	r := gin.Default()
 
