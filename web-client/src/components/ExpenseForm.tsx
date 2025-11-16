@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Category } from '../types';
+import type { Category } from '../types';
 import { api } from '../services/api';
 
 interface Props {
@@ -23,7 +23,7 @@ const ExpenseForm: React.FC<Props> = ({ onTransactionAdded }) => {
     try {
       const response = await api.getCategories();
       setCategories(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load categories:', error);
     }
   };
@@ -47,7 +47,7 @@ const ExpenseForm: React.FC<Props> = ({ onTransactionAdded }) => {
         date: new Date().toISOString().split('T')[0]
       });
       onTransactionAdded();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to create transaction:', error);
       console.error('Error details:', error.response?.data);
     }
