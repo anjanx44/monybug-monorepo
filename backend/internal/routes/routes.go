@@ -4,11 +4,23 @@ import (
 	"monybug-backend/internal/database"
 	"monybug-backend/internal/handlers"
 	"net/http"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRoutes(r *gin.Engine) {
+	// CORS middleware - Allow all origins for development
+	r.Use(cors.New(cors.Config{
+		AllowAllOrigins:  true,
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"*"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: false,
+		MaxAge:           12 * time.Hour,
+	}))
+
 	// Health check endpoint
 	r.GET("/health", func(c *gin.Context) {
 		dbStatus := "ok"
