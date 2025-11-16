@@ -1,0 +1,251 @@
+/* --- 1. Global & Variables --- */
+:root {
+  --color-primary: #2563eb; /* Blue */
+  --color-success: #10b981; /* Green */
+  --color-danger: #ef4444; /* Red */
+  --color-text: #1f2937; /* Dark Gray */
+  --color-background: #f3f4f6; /* Light Gray */
+  --color-card-bg: #ffffff;
+  --border-radius: 8px;
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  font-family: 'Inter', sans-serif;
+  color: var(--color-text);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- 2. Card Styles (Shared) --- */
+.card {
+  background-color: var(--color-card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* --- 3. Form & Input Styles (Top Section) --- */
+#expense-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.form-group {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+label {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+}
+.btn-primary:hover {
+  background-color: #1e40af;
+}
+
+.btn-success {
+  background-color: var(--color-success);
+}
+.btn-success:hover {
+  background-color: #059669;
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+}
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+/* --- 4. Summary Cards (Middle Section) --- */
+#summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  text-align: center;
+  background-color: var(--color-card-bg);
+  border-left: 5px solid var(--color-primary);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+}
+.summary-card.budget-card {
+  border-left-color: var(--color-success);
+}
+
+.summary-card h3 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.summary-card p {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* --- 5. Transaction List (Bottom Section) --- */
+.date-group {
+  margin-bottom: 20px;
+}
+
+.date-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 25px 0 10px 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #e5e7eb;
+  color: var(--color-primary);
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: var(--color-card-bg);
+  margin-bottom: 8px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  transition: background-color 0.2s;
+}
+
+.transaction-item:hover {
+  background-color: #f9fafb;
+}
+
+.category-icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  width: 30px;
+  text-align: center;
+}
+
+.details {
+  flex-grow: 1;
+}
+
+.details p {
+  margin: 0;
+  line-height: 1.3;
+}
+
+.description {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.time {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.amount-display {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-danger);
+  min-width: 100px;
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+  margin-left: 15px;
+}
+
+.actions button {
+  padding: 8px;
+  font-size: 0.9rem;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive form layout for mobile */
+@media (max-width: 768px) {
+  #expense-form {
+    flex-direction: column;
+  }
+  .form-group {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .transaction-item {
+    flex-wrap: wrap;
+  }
+  .amount-display {
+    order: 3;
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 1.1rem;
+  }
+  .actions {
+    order: 2;
+    margin-left: auto;
+  }
+}
