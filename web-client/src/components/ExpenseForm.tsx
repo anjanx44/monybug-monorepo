@@ -31,11 +31,15 @@ const ExpenseForm: React.FC<Props> = ({ onTransactionAdded }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await api.createTransaction({
-        ...formData,
+      const transactionData = {
+        category_id: parseInt(formData.category_id),
         amount: parseFloat(formData.amount),
-        category_id: parseInt(formData.category_id)
-      });
+        currency: 'BDT',
+        description: formData.description,
+        date: formData.date + 'T00:00:00Z'
+      };
+      console.log('Sending transaction:', transactionData);
+      await api.createTransaction(transactionData);
       setFormData({
         amount: '',
         category_id: '',
@@ -45,6 +49,7 @@ const ExpenseForm: React.FC<Props> = ({ onTransactionAdded }) => {
       onTransactionAdded();
     } catch (error) {
       console.error('Failed to create transaction:', error);
+      console.error('Error details:', error.response?.data);
     }
   };
 
