@@ -1,0 +1,40 @@
+erDiagram
+    CATEGORIES ||--o{ TRANSACTIONS : classified_as
+    CATEGORIES ||--o{ BUDGETS : limits
+
+    CATEGORIES {
+        int category_id PK
+        varchar name "Food, Transport, Kids"
+        varchar type "EXPENSE or INCOME"
+        varchar priority "ESSENTIAL, IMPORTANT, LUXURY"
+        varchar color_code "#FF5733"
+        boolean is_active "true"
+    }
+
+    TRANSACTIONS {
+        int transaction_id PK
+        int category_id FK
+        date transaction_date
+        numeric amount "10, 2"
+        varchar currency "BDT"
+        varchar description "baby toy"
+        varchar tags "toy, kids"
+        timestamp created_at
+    }
+
+    BUDGETS {
+        int budget_id PK
+        int category_id FK
+        numeric monthly_limit "5000.00"
+        date month "2024-01-01"
+        boolean is_active "true"
+    }
+
+    EXPENSE_INSIGHTS {
+        int insight_id PK
+        varchar insight_type "OVERSPEND, TREND, PATTERN"
+        varchar message "Food spending up 20%"
+        varchar period "2024-01"
+        json data "Additional metrics"
+        timestamp generated_at
+    }

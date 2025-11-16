@@ -1,0 +1,61 @@
+erDiagram
+    USERS ||--o{ CATEGORIES : has
+    USERS ||--o{ TRANSACTIONS : records
+    USERS ||--o{ BUDGETS : sets
+    USERS ||--o{ EXPENSE_INSIGHTS : generates
+
+    USERS {
+        int user_id PK
+        varchar username
+        varchar password_hash
+        varchar default_currency "BDT"
+        timestamp created_at
+    }
+
+    CATEGORIES {
+        int category_id PK
+        int user_id FK "User who owns the category"
+        varchar name "e.g., Groceries, Salary"
+        varchar type "EXPENSE or INCOME"
+        varchar priority "ESSENTIAL, IMPORTANT, LUXURY"
+        varchar color_code "For charts #FF5733"
+        boolean is_active "true/false"
+    }
+
+    TRANSACTIONS {
+        int transaction_id PK
+        int user_id FK "User who made the transaction"
+        int category_id FK "Links to the category"
+        date transaction_date
+        numeric amount "10, 2"
+        char currency "3-letter code"
+        varchar description
+        varchar tags "comma separated"
+        timestamp created_at
+    }
+
+    BUDGETS {
+        int budget_id PK
+        int user_id FK
+        int category_id FK
+        numeric monthly_limit "10, 2"
+        varchar period "MONTHLY, YEARLY"
+        date start_date
+        date end_date
+        boolean is_active
+        timestamp created_at
+    }
+
+    EXPENSE_INSIGHTS {
+        int insight_id PK
+        int user_id FK
+        varchar insight_type "OVERSPEND, TREND, PATTERN"
+        varchar message "You spent 20% more on food"
+        varchar period "2024-01"
+        json data "Additional metrics"
+        timestamp generated_at
+    }
+
+    CATEGORIES ||--o{ TRANSACTIONS : classified_as
+    CATEGORIES ||--o{ BUDGETS : limits
+    USERS ||--o{ EXPENSE_INSIGHTS : receives
