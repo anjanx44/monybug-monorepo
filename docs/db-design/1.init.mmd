@@ -1,0 +1,30 @@
+erDiagram
+    USERS ||--o{ CATEGORIES : has
+    USERS ||--o{ TRANSACTIONS : records
+
+    USERS {
+        int user_id PK
+        varchar username
+        varchar password_hash
+        timestamp created_at
+    }
+
+    CATEGORIES {
+        int category_id PK
+        int user_id FK "User who owns the category"
+        varchar name "e.g., Groceries, Salary"
+        varchar type "EXPENSE or INCOME"
+    }
+
+    TRANSACTIONS {
+        int transaction_id PK
+        int user_id FK "User who made the transaction"
+        int category_id FK "Links to the category"
+        date transaction_date
+        numeric amount "10, 2"
+        char currency "3-letter code"
+        varchar description
+        timestamp created_at
+    }
+
+    CATEGORIES ||--o{ TRANSACTIONS : classified_as
